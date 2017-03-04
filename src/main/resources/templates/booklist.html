@@ -15,19 +15,21 @@
 			    <th>Title</th>
 			    <th>ISBN</th>
 			    <th>Year</th>
+			    <th>Category</th>
 			</tr>
 		</thead>
-		<tr th:each = "thebook:${books}">
-			<td th:text = "${thebook.author} + ' ' "></td>
-			<td th:text = "${thebook.title} + ' ' "></td>
-			<td th:text = "${thebook.isbn} + ' ' "></td>
-			<td th:text = "${thebook.year}"></td>
-			 <td> <a class = "btn btn-danger" th:href="@{/delete/{id}(id=${thebook.id})}">Delete</a></td>
+		<tr th:each = "abook:${books}">
+			<td th:text = "${abook.author} + ' ' "></td>
+			<td th:text = "${abook.title} + ' ' "></td>
+			<td th:text = "${abook.isbn} + ' ' "></td>
+			<td th:text = "${abook.year}"></td>
+			<td th:text = "${abook.category.name}"></td>
+			 <td> <a class = "btn btn-danger" th:href="@{/delete/{id}(id=${abook.id})}">Delete</a></td>
 		</tr>  
 	</table>
 	<a class = "btn btn-success" href="/add">Add Book</a> 
 	</div>
-	<script scr = "webjars/jquery/1.9.1/jquery.min.js"></script>
-	<script scr = "webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src = "webjars/jquery/1.9.1/jquery.min.js"></script>
+	<script src = "webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

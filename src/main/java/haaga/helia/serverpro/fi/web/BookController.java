@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import haaga.helia.serverpro.fi.domain.Book;
 import haaga.helia.serverpro.fi.domain.BookRepository;
+import haaga.helia.serverpro.fi.domain.CategoryRepository;
 
 
 @Controller
@@ -19,8 +20,11 @@ public class BookController {
 	@Autowired
 	private BookRepository repository;
 	
+	@Autowired
+	private CategoryRepository crepository;
+	
 	@RequestMapping(value="/booklist")
-    public String bookStore(Model model) {
+    public String displayBookStore(Model model) {
         model.addAttribute("books", repository.findAll());
         return "booklist";
     }
@@ -40,6 +44,7 @@ public class BookController {
 		@RequestMapping (value = "/add")
 		public String addBook(Model model){
 			model.addAttribute("book", new Book());
+			model.addAttribute("categories", crepository.findAll());
 			return "addbook";
 		}
 		
