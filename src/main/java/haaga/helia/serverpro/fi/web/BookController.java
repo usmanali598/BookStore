@@ -3,6 +3,7 @@ package haaga.helia.serverpro.fi.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,12 @@ public class BookController {
 	@Autowired
 	private CategoryRepository crepository;
 	
+	// Show all students
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+	
 	@RequestMapping(value="/booklist")
     public String displayBookStore(Model model) {
         model.addAttribute("books", repository.findAll());
@@ -41,8 +48,10 @@ public class BookController {
     	return repository.findOne(bookId);	
     } 
 	
-		@RequestMapping (value = "/add")
-		public String addBook(Model model){
+    // Add new student
+    @PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping (value = "/add")
+	public String addBook(Model model){
 			model.addAttribute("book", new Book());
 			model.addAttribute("categories", crepository.findAll());
 			return "addbook";
